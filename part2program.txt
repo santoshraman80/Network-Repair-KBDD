@@ -1,0 +1,54 @@
+# 
+boolean a b c d e f g h pri_in pri_N S2 S1 S0
+#
+eval Y a&c&!e&g&h + a&b&!h + d&e&!f&!g + !b&!c&d&e + a&!e&h + !c&!g
+#
+eval PRI (pri_N^pri_in)
+#
+eval N0 (!S2)&(!S1)&(!S0)
+eval N1 (!S2)&(!S1)&S0
+eval N2 (!S2)&S1&(!S0)
+eval N3 (!S2)&S1&S0
+eval N4 S2&(!S1)&(!S0)
+eval N5 S2&(!S1)&S0
+eval N6 S2&S1&(!S0)
+eval N7 S2&S1&S0
+#
+eval t1 !(b+c)
+eval w0 !(f+g)^N0
+eval t2 !e
+eval w1 !h^N1
+eval w2 !(c+g)^N2
+eval w3 (t1+w0)^N3
+eval t3 t2&h
+eval t4 w1&b
+eval w4 !(t3+t4)^N4
+eval t5 d&w3
+eval t6 !w4
+eval w5 !(t5&e)^N5
+eval w6 (t6&a)^N6
+eval t7 !(w6+w2)
+eval w7 !t7^N7
+eval Y_repair w5+w7
+#
+eval Z !(Y ^ Y_repair)
+#
+quantify u Z_quantify Z a b c d e f g h 
+#
+satisfy Z_quantify
+#
+eval wire0 0
+eval wire1 0
+eval wire2 0
+eval wire3 0
+eval wire4 0
+eval wire5 1
+eval wire6 0
+eval wire7 0
+
+# invert wire 5 
+eval wire5 1
+#
+
+
+
